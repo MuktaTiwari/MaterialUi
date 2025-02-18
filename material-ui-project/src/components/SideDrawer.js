@@ -11,10 +11,11 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import GraphComponent from './GraphComponent';
+import { useNavigate } from 'react-router-dom';
 
 export default function SideDrawer({children}) {
   const [open, setOpen] = React.useState(false);
-  const [showGraph , setShowGraph] = React.useState(false);
+  const navigate = useNavigate();
 
   const toggleDrawer = (open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -24,9 +25,12 @@ export default function SideDrawer({children}) {
   };
   const handleMenuClick = (text) => {
     if (text === 'Graph') {
-      setShowGraph(true);
-      setOpen(false);
+      navigate('/graph')
     }
+    if (text === 'Home') {
+      navigate('/')
+    }
+    setOpen(false);
   };
 
   const list = (
@@ -37,7 +41,7 @@ export default function SideDrawer({children}) {
       onKeyDown={toggleDrawer(false)}
     >
        <List>
-        {['Inbox', 'Graph', 'Send email', 'Drafts'].map((text, index) => (
+        {['Home', 'Graph', 'Send email', 'Drafts'].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton onClick={() => handleMenuClick(text)}>
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
@@ -71,7 +75,6 @@ export default function SideDrawer({children}) {
       >
         {list}
       </SwipeableDrawer>
-      {showGraph && <GraphComponent />}
     </div>
   );
 }

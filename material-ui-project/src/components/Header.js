@@ -5,9 +5,12 @@ import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import {Badge} from '@mui/material';
 import SideDrawer from './SideDrawer';
+import { useLocation } from 'react-router-dom';
 
 
 const Header = () => {
+
+    const location = useLocation();
 
   return (
     <>
@@ -33,7 +36,7 @@ const Header = () => {
         </IconButton>
     </Toolbar>
     <Divider />
-    <Toolbar sx={{ flexGrow: 1 }}>Blogging Website</Toolbar>
+  
     </>
   )
 }
